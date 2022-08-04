@@ -23,7 +23,7 @@ func main() {
 	//loc, _ := time.LoadLocation("Asia/Ho_Chi_Minh")
 	//now := time.Now().In(loc)
 	//fmt.Println(now)
-	//err1, err := db.Exec("INSERT INTO distributor_news (supplier_id, create_at, update_at, distributor_news_id, categories_id, enable, expiry_date, content,title) VALUES (?, ?, ?, ?, ?, ?, ?, ?,? ) ", 589, now, now, distributor_news_id, 10, 1, now, "Hello", "Check")
+	//err1, err := db.Exec("INSERT INTO distributor_news (supplier_id, create_at, update_at, distributor_news_id, categories_id, status, expiry_date, content,title) VALUES (?, ?, ?, ?, ?, ?, ?, ?,? ) ", 589, now, now, distributor_news_id, 10, "wait", now, "Hello 2", "Check")
 	//fmt.Println(err1)
 	//if err != nil {
 	//	panic(err.Error())
