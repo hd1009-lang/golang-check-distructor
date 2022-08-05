@@ -1,8 +1,9 @@
 package types
 
-type DistributorNewsList struct {
-	PageSize uint16 `json:"page_size"`
-	Page     uint16 `json:"page"`
+type DistributorNewsListParams struct {
+	PageSize   uint16 `json:"page_size"`
+	Page       uint16 `json:"page"`
+	SupplierId uint64 `json:"supplier_id"`
 }
 type DistributorNewsItem struct {
 	Supplier_id         uint64 `json:"supplier_id"`

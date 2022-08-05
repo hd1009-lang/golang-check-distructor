@@ -8,11 +8,11 @@ import (
 )
 
 func GetList(c *fiber.Ctx) error {
-	data := new(types.DistributorNewsList)
+	data := new(types.DistributorNewsListParams)
 	if err := c.BodyParser(data); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": 404, "message": "Error on set permission request", "data": err})
 	}
-	result := models.GetDistributorNews(data.Page, data.PageSize)
+	result := models.GetDistributorNews(data)
 	return c.JSON(fiber.Map{"status": 200, "message": "Success", "data": result, "currentPage": data.Page})
 }
 
@@ -34,6 +34,32 @@ func DeleteNews(c *fiber.Ctx) error {
 	err := models.DeleteNews(id)
 	if err != nil {
 		fmt.Println(err)
+	}
+	return c.JSON(fiber.Map{"status": 200, "message": "Success!"})
+}
+
+func UpdateNews(c *fiber.Ctx) error {
+	var id = c.Params("id")
+	data := new(types.DistributorNewsForm)
+	if err := c.BodyParser(data); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": 404, "message": "Data request invalid", "data": err})
+	}
+	err := models.UpdateNews(id, data)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": 404, "message": "Data request invalid", "data": err})
+	}
+	return c.JSON(fiber.Map{"status": 200, "message": "Success!"})
+}
+
+func UpdateStatusNews(c *fiber.Ctx) error {
+	var id = c.Params("id")
+	data := new(types.DistributorNewsForm)
+	if err := c.BodyParser(data); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": 404, "message": "Data request invalid", "data": err})
+	}
+	err := models.UpdateStatusNews(id, data.Status)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": 404, "message": "Data request invalid", "data": err})
 	}
 	return c.JSON(fiber.Map{"status": 200, "message": "Success!"})
 }
